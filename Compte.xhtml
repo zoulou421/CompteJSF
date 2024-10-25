@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>Account Management</title>
+    <h:outputStylesheet name="styles.css" /> <!-- Link to external CSS -->
+</h:head>
+
+<h:body>
+    <div>
+        <h:form>
+            <h:panelGrid columns="2" styleClass="input-grid">
+                <h:outputText value="Code 1:"/>
+                <h:inputText value="#{compteMB.code1}" required="true" requiredMessage="Code 1 is required."/>
+                
+                <h:outputText value="Code 2:"/>
+                <h:inputText value="#{compteMB.code2}"/>
+                
+                <h:outputText value="Montant:"/>
+                <h:inputText value="#{compteMB.montant}" required="true" requiredMessage="Montant is required."/>
+                
+                <h:commandButton action="#{compteMB.verser}" value="Verser"/>
+                <h:commandButton action="#{compteMB.retirer}" value="Retirer"/>
+                <h:commandButton action="#{compteMB.virement}" value="Virement"/>
+                <h:commandButton action="#{compteMB.ajouter}" value="Ajouter"/>
+            </h:panelGrid>
+        </h:form>
+
+        <h:dataTable value="#{compteMB.listComptes}" var="cp" styleClass="data-table">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Code"/>
+                </f:facet>
+                <h:outputText value="#{cp.code}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="SOLDE"/>
+                </f:facet>
+                <h:outputText value="#{cp.solde}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Date"/>
+                </f:facet>
+                <h:outputText value="#{cp.dateCreation}">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Active"/>
+                </f:facet>
+                <h:outputText value="#{cp.active}" />
+            </h:column>
+        </h:dataTable>
+    </div>
+</h:body>
+
+</html>
